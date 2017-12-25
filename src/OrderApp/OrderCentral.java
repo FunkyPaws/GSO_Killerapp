@@ -15,7 +15,7 @@ public class OrderCentral extends Application implements IEstabOrder {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("mc Donalds");
-        primaryStage.setScene(new Scene(root, 1200, 1000));
+        primaryStage.setScene(new Scene(root, 700, 800));
         primaryStage.show();
     }
 
