@@ -1,6 +1,6 @@
 package Shared;
 
-import java.io.Serializable;
+import java.rmi.Remote;
 
 /**
  * Interface is serializable.
@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Methode getAmount gets the amount of the amount of items.
  * The methode returns a integer.
  */
-public interface IStock extends Serializable {
+public interface IStock   {
     String getItemName();
     Integer getAmount();
 

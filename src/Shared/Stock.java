@@ -1,15 +1,16 @@
 package Shared;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class Stock extends UnicastRemoteObject implements IStock {
+public class Stock implements IStock, Serializable {
 
     private String itemName;
     private Integer amount;
     private Item item;
 
-    public Stock(Integer amount) throws RemoteException {
+    public Stock(Integer amount) {
         this.itemName = item.getName();
         this.amount = amount;
     }

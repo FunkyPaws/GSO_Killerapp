@@ -1,21 +1,20 @@
-package MCDCentral;
+package OrderApp;
 
 import Shared.IEstabOrder;
 
-import java.rmi.*;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import static javafx.application.Application.launch;
-
-public class MCDCentral  {
-
+public class ClientComunicator {
     private final String hostID = "localhost";
     private final int port = 1099;
     private IEstabOrder iEstabOrder;
     private Registry registry = null;
 
-    public MCDCentral() {
+    public ClientComunicator() {
+
         try
         {
             registry = LocateRegistry.getRegistry(hostID, port);
@@ -62,10 +61,4 @@ public class MCDCentral  {
             System.out.println("Client: server is null pointer");
         }
     }
-
-    public static void main(String[] args) {
-
-        launch(args);
-    }
-
 }

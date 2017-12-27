@@ -7,12 +7,13 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class EstablishmentManager extends UnicastRemoteObject implements IEstabCentral {
 
-    protected EstablishmentManager() throws RemoteException {
+    public EstablishmentManager() throws RemoteException {
 
     }
 
     @Override
     public Stock getStock(String estabName) {
         return null;
+        // TODO dumy ding maken
     }
 }

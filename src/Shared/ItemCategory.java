@@ -1,6 +1,8 @@
 package Shared;
 
-public enum ItemCategory {
+import java.io.Serializable;
+
+public enum ItemCategory implements Serializable {
     Burger,
     Drink,
     Salad,

@@ -1,4 +1,4 @@
-package OrderApp;
+package Shared;
 
 import java.rmi.Remote;
 

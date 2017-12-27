@@ -1,6 +1,7 @@
 package Shared;
 
 import java.io.Serializable;
+import java.rmi.Remote;
 
 /**
  * Interface is serializable.
@@ -13,7 +14,7 @@ import java.io.Serializable;
  * Methode getCategory get the category of the item.
  * The methode returns a ItemCategorie Enum.
  */
-public interface IItem extends Serializable {
+public interface IItem  {
     String getName();
     Double getPrice();
     String getDescription();
