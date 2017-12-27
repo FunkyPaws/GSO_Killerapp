@@ -12,11 +12,15 @@ public class EstabApp extends Application {
 
     private Manager manager;
     private List<Manager> managers;
-    private Reg registry;
+    private EstablishmentManager establishmentManager;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        registry = new Reg();
+        try {
+            establishmentManager = new EstablishmentManager();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));

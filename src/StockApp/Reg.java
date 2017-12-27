@@ -1,24 +1,19 @@
 package StockApp;
 
-import java.rmi.AccessException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class Reg {
 
+    // server
     private static final int portNumber = 1099;
     private static final String bindingName = "Server";
     private Registry registry = null;
     private EstablishmentManager manager;
 
-    public Reg() {
-
-        try {
-            manager = new EstablishmentManager();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+    public Reg(EstablishmentManager manager) {
+            this.manager = manager;
         try {
             registry = LocateRegistry.createRegistry(portNumber);
             System.out.println("created reg: " + registry.toString());
