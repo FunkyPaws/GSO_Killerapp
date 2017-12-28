@@ -23,7 +23,7 @@ public class EstabApp extends Application {
         }
 
 
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../Views/ManagerInlog.fxml"));
         primaryStage.setTitle("Mc Donald's");
         primaryStage.setScene(new Scene(root, 1200, 1000));
         primaryStage.show();
