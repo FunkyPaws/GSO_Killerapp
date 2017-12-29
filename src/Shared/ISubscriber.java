@@ -1,8 +1,10 @@
 package Shared;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
-public interface ISubscriber {
-    // listner mcd
-    void update(String vestigingNaam, List<Stock> stock);
+public interface ISubscriber extends Remote{
+    // listner mcdCentrale
+    void update(String vestigingNaam, List<Stock> stock)throws RemoteException;
 }

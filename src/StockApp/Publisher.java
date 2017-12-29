@@ -32,7 +32,11 @@ public class Publisher extends UnicastRemoteObject implements ICreator{
     @Override
     public void update(String vestigingNaam, List<Stock> stock) {
         for (ISubscriber iSubscriber: subscribers){
-            iSubscriber.update(vestigingNaam, stock);
+            try {
+                iSubscriber.update(vestigingNaam, stock);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
