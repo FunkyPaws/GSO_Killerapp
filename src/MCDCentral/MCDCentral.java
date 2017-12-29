@@ -3,7 +3,7 @@ package MCDCentral;
 import Shared.IEstabOrder;
 import Shared.ISubscriber;
 import Shared.Stock;
-import com.sun.org.apache.bcel.internal.generic.ISUB;
+import StockApp.IEstabCentral;
 
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
@@ -16,7 +16,7 @@ public class MCDCentral implements ISubscriber {
 
     private final String hostID = "localhost";
     private final int port = 1099;
-    private IEstabOrder iEstabOrder;
+    private IEstabCentral iEstabCentral;
     private Registry registry = null;
 
     public MCDCentral() {
@@ -31,21 +31,21 @@ public class MCDCentral implements ISubscriber {
         if (registry != null) {
             System.out.println("Client: Registry located");
             try {
-                iEstabOrder = (IEstabOrder) registry.lookup("Server");
+                iEstabCentral = (IEstabCentral) registry.lookup("Server");
             } catch (RemoteException ex) {
                 System.out.println("Client: Cannot bind server");
                 System.out.println("Client: RemoteException: " + ex.getMessage());
-                iEstabOrder = null;
+                iEstabCentral = null;
             } catch (NotBoundException ex) {
                 System.out.println("Client: Cannot bind server");
                 System.out.println("Client: NotBoundException: " + ex.getMessage());
-                iEstabOrder = null;
+                iEstabCentral = null;
             }
         } else {
             System.out.println("Client: Cannot locate registry");
             System.out.println("Client: Registry is null pointer");
         }
-        if (iEstabOrder != null) {
+        if (iEstabCentral != null) {
             System.out.println("Client: server bound");
         } else {
             System.out.println("Client: server is null pointer");
@@ -53,13 +53,13 @@ public class MCDCentral implements ISubscriber {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        MCDCentral central = new MCDCentral();
     }
 
     @Override
     public void update(String vestigingNaam, List<Stock> stock) {
         System.out.println("Vestiging : " + vestigingNaam + "\n" + "items: " + stock);
-
-
     }
+
+
 }

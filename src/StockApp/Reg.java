@@ -1,5 +1,6 @@
 package StockApp;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -10,7 +11,7 @@ public class Reg {
     private static final int portNumber = 1099;
     private static final String bindingName = "Server";
     private Registry registry = null;
-    private EstablishmentManager manager;
+    private IEstabCentral manager;
 
     public Reg(EstablishmentManager manager) {
             this.manager = manager;
@@ -26,6 +27,17 @@ public class Reg {
             registry.rebind(bindingName, manager);
         } catch (RemoteException e) {
             System.out.println("cannot bind manager");
+            e.printStackTrace();
+        }
+    }
+
+    public void RegistrateObject(Publisher publisher){
+        try {
+            if(publisher != null){
+                registry.rebind("publisher", publisher);
+            }
+        }catch (RemoteException e) {
+            System.out.println("cannot bind publisher");
             e.printStackTrace();
         }
     }

@@ -1,10 +1,13 @@
 package Shared;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.time.chrono.IsoChronology;
+import java.util.List;
 
-public interface ICreator {
+public interface ICreator  extends Remote{
     //accept specific subscriber
-    void aanmelden(ISubscriber iSubscriber);
-    void afmelden(ISubscriber iSubscriber);
-    void update();
+    void aanmelden(ISubscriber iSubscriber)throws RemoteException;
+    void afmelden(ISubscriber iSubscriber)throws RemoteException;
+    void update(String vestigingNaam, List<Stock> stock)throws RemoteException;
 }
