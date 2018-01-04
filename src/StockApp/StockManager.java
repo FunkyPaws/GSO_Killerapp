@@ -4,19 +4,18 @@ import Shared.Item;
 import Shared.ItemCategory;
 import Shared.Stock;
 
-import java.awt.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EstablishmentManager extends UnicastRemoteObject implements IEstabCentral {
+public class StockManager extends UnicastRemoteObject implements IStockCentral {
 
-    private Reg registry;
+    private Registry registry;
     private Publisher publisher;
 
-    public EstablishmentManager() throws RemoteException {
-        registry = new Reg(this);
+    public StockManager() throws RemoteException {
+        registry = new Registry(this);
         publisher = new Publisher();
         registry.RegistrateObject(publisher);
     }

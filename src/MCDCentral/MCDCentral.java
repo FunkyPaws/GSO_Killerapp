@@ -3,7 +3,7 @@ package MCDCentral;
 import Shared.ICreator;
 import Shared.ISubscriber;
 import Shared.Stock;
-import StockApp.IEstabCentral;
+import StockApp.IStockCentral;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -14,11 +14,11 @@ public class MCDCentral extends UnicastRemoteObject implements ISubscriber {
 
     private final String hostID = "localhost";
     private final int port = 1099;
-    private IEstabCentral iEstabCentral;
+    private IStockCentral iStockCentral;
     private Registry registry = null;
     private ICreator creator = null;
 
-    public MCDCentral() throws RemoteException{
+    public MCDCentral() throws RemoteException {
         try {
             registry = LocateRegistry.getRegistry(hostID, port);
         } catch (RemoteException ex) {
@@ -30,19 +30,18 @@ public class MCDCentral extends UnicastRemoteObject implements ISubscriber {
         if (registry != null) {
             System.out.println("Client: Registry located");
             try {
-                iEstabCentral = (IEstabCentral) registry.lookup("Server");
+                iStockCentral = (IStockCentral) registry.lookup("Server");
             } catch (Exception ex) {
                 System.out.println("Client: Cannot bind server");
                 System.out.println("Client: RemoteException: " + ex.getMessage());
                 ex.printStackTrace();
-                iEstabCentral = null;
+                iStockCentral = null;
             }
-
         } else {
             System.out.println("Client: Cannot locate registry");
             System.out.println("Client: Registry is null pointer");
         }
-        if (iEstabCentral != null) {
+        if (iStockCentral != null) {
             System.out.println("Client: server bound");
             getCreator();
         } else {
@@ -59,12 +58,15 @@ public class MCDCentral extends UnicastRemoteObject implements ISubscriber {
     }
 
     @Override
-    public void update(String vestigingNaam, List<Stock> stock) {
-        System.out.println("Vestiging : " + vestigingNaam + "\n" + "items: " + stock);
+    public void update(String vestigingNaam, List<Stock> stocks) {
+        System.out.println("Vestiging : " + vestigingNaam + "\n Voorraad: ");
+        for (Stock stock : stocks) {
+            System.out.println("Item: " + stock.getItemName() + "Amount: " + stock.getAmount());
+        }
     }
 
-    public void getCreator(){
-        if(registry !=null) {
+    public void getCreator() {
+        if (registry != null) {
             try {
                 creator = (ICreator) registry.lookup("publisher");
                 System.out.println("publisher found");
@@ -77,7 +79,7 @@ public class MCDCentral extends UnicastRemoteObject implements ISubscriber {
                 System.out.println("Client: NotBoundException: " + ex.getMessage());
                 creator = null;
             }
-        }else {
+        } else {
             System.out.println("Client: Cannot locate registry");
             System.out.println("Client: Registry is null pointer");
         }
@@ -85,9 +87,9 @@ public class MCDCentral extends UnicastRemoteObject implements ISubscriber {
         if (creator != null) {
             try {
                 creator.aanmelden(this);
-                System.out.println("Client: Aangemeld");
+                System.out.println("Client status: Aangemeld");
             } catch (RemoteException e) {
-                System.out.println("Client: niet aangemeld");
+                System.out.println("Client status: Niet aangemeld");
                 e.printStackTrace();
             }
         }

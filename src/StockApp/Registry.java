@@ -2,12 +2,10 @@ package StockApp;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 
-public class Reg {
+public class Registry {
 
     // server
     private static final int portNumber = 1099;
@@ -15,10 +13,10 @@ public class Reg {
     private static final String PROTOCOL = "java.rmi.server.hostname";
     private static String HOST = "192.168.0.25";
 
-    private Registry registry = null;
-    private IEstabCentral manager;
+    private java.rmi.registry.Registry registry = null;
+    private IStockCentral manager;
 
-    public Reg(EstablishmentManager manager) {
+    public Registry(StockManager manager) {
         this.manager = manager;
 //        setHost();
         try {

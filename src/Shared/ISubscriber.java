@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ISubscriber extends Remote{
     // listner mcdCentrale
-    void update(String vestigingNaam, List<Stock> stock)throws RemoteException;
+    void update(String vestigingNaam, List<Stock> stocks)throws RemoteException;
 }

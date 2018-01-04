@@ -22,16 +22,16 @@ public class OrderRegel implements IOrderRegel {
     }
 
     @Override
+    public Item getItem() {
+        return item;
+    }
+
+    @Override
     public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
-
-    public void setItem(Item item){
-        this.item = item;
-    }
-
 }

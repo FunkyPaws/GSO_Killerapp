@@ -13,5 +13,6 @@ import java.io.Serializable;
  */
 public interface IOrderRegel extends Serializable {
     Item getItem(String itemName);
+    Item getItem();
     Integer getAmount();
 }

@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class OrderCentral extends Application implements IEstabOrder {
+public class KioskApp extends Application implements IEstabOrder {
 
     private Order order;
     private Order currentOrder;
@@ -15,7 +15,7 @@ public class OrderCentral extends Application implements IEstabOrder {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../Views/KioskStart.fxml"));
-        primaryStage.setTitle("mc Donalds");
+        primaryStage.setTitle("MC Donalds");
         primaryStage.setScene(new Scene(root, 700, 800));
         primaryStage.show();
     }
@@ -31,8 +31,7 @@ public class OrderCentral extends Application implements IEstabOrder {
     }
 
     public void newOrder(){
-        order = new Order(1, false);
+        order = new Order(false);
         currentOrder = order;
-        //TODO check
     }
 }

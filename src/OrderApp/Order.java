@@ -4,9 +4,9 @@ import Shared.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order implements IOrder {
+public class Order{
 
-    private Integer orderNumber;
+    private Integer orderNumber = 0;
     private Double totalPrice;
     private Boolean orderStatus;
 
@@ -26,25 +26,44 @@ public class Order implements IOrder {
         orderRegels = new ArrayList<>();
     }
 
+    public Order(Boolean orderStatus) {
+        this.totalPrice = 0.0;
+        this.orderStatus = orderStatus;
+        orderRegels = new ArrayList<>();
+    }
 
     public void addItem(Item item, int amount) {
+        int i = 0;
+        if(orderRegels.contains(item)){
+            for (OrderRegel orderRegel : orderRegels) {
+                if(orderRegel.getItem().equals(item)){
+                   i = orderRegel.getAmount();
+                   i += amount;
+                   orderRegel.setAmount(i);
+                }
+            }
+        } else if(!orderRegels.contains(item)){
         OrderRegel regel = new OrderRegel(item, amount);
         orderRegels.add(regel);
+        }
     }
 
     public void removeItem(Item item, int amount) {
-        orderRegels.remove(item);
-        //TODO test if this is the right methode to do so.
+        if(item != null) {
+            orderRegels.remove(item);
+        }
     }
 
-    @Override
     public List<OrderRegel> getOrderRegel() {
-        //TODO fill in methode.
-        return null;
+        return orderRegels;
     }
 
     public void nextOrderNumber() {
-        //TODO fill in methode.
+        if(orderNumber < 100){
+            orderNumber ++;
+        } else if(orderNumber == 99){
+            orderNumber = 0;
+        }
     }
 
     public void changeOrderStatus() {
@@ -52,6 +71,12 @@ public class Order implements IOrder {
             orderStatus = false;
         } else if (orderStatus == false) {
             orderStatus = true;
+        }
+    }
+
+    public void getTotalPrice(){
+        for (OrderRegel orderregel: orderRegels) {
+            totalPrice += orderregel.getItem().getPrice();
         }
     }
 }

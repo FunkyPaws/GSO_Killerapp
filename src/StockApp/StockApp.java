@@ -11,11 +11,11 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
-public class EstabApp extends Application {
+public class StockApp extends Application {
 
     private Manager manager;
     private List<Manager> managers;
-    private EstablishmentManager establishmentManager;
+    private StockManager stockManager;
 
     public Button buttonTest;
 
@@ -29,20 +29,16 @@ public class EstabApp extends Application {
         buttonTest = (Button) root.lookup("#henk");
 
         try {
-            establishmentManager = new EstablishmentManager();
+            stockManager = new StockManager();
         } catch (Exception e) {
             e.printStackTrace();
         }
         buttonTest.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                establishmentManager.getStock("Henkus");
-
+                stockManager.getStock("Henkus");
             }
         });
-
-
-
     }
 
 
