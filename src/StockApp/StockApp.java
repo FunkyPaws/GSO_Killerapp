@@ -47,5 +47,6 @@ public class StockApp extends Application {
     }
 
     public void sessieSatarten(String name, String password) {
+        //TODO : Fill in method
     }
 }

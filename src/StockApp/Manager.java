@@ -27,11 +27,7 @@ public class Manager {
     }
 
     public boolean checkLogin(String loginName, String password) {
-        if (loginName == this.loginName && password == this.password) {
-            return true;
-        } else {
-            return false;
-        }
+        return loginName == this.loginName && password == this.password;
     }
 
 }

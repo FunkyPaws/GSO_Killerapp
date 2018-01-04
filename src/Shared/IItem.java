@@ -1,8 +1,5 @@
 package Shared;
 
-import java.io.Serializable;
-import java.rmi.Remote;
-
 /**
  * Interface is serializable.
  * Methode getName gets the name of the item.

@@ -1,8 +1,6 @@
 package Shared;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 
 public class Item implements IItem, Serializable {
 
