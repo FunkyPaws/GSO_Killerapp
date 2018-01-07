@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label layoutX="135.0" layoutY="64.0" text="Uw ordernumer: " textAlignment="CENTER">
+            <font>
+                <Font size="72.0" />
+            </font>
+        </Label>
+        <TextField id="txtNumber" editable="false" layoutX="285.0" layoutY="302.0" prefHeight="51.0" prefWidth="201.0">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </TextField>
+    </children>
+</AnchorPane>
+

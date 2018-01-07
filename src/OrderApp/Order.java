@@ -12,22 +12,19 @@ public class Order {
 
     private Integer orderNumber = 0;
     private Double totalPrice;
-    private Boolean orderStatus;
 
     private ObservableList<OrderRegel> observerListOrderregels;
     private List<OrderRegel> orderRegels;
 
-    public Order(Integer orderNumber, Double totalPrice, Boolean orderStatus) {
+    public Order(Integer orderNumber, Double totalPrice) {
         this.orderNumber = orderNumber;
         this.totalPrice = totalPrice;
-        this.orderStatus = orderStatus;
         orderRegels = new ArrayList<>();
         observerListOrderregels = FXCollections.observableList(orderRegels);
     }
 
-    public Order(Boolean orderStatus) {
+    public Order() {
         this.totalPrice = 0.0;
-        this.orderStatus = orderStatus;
         orderRegels = new ArrayList<>();
         observerListOrderregels = FXCollections.observableList(orderRegels);
     }
@@ -37,7 +34,7 @@ public class Order {
     }
 
     public void addItem(Item item, int amount) {
-        int j =0;
+        int j = 0;
         OrderRegel orderRegel = new OrderRegel(item, amount);
 
         if (observerListOrderregels.contains(orderRegel)) {
@@ -60,6 +57,7 @@ public class Order {
     }
 
     public void removeItem(Item item, int amount) {
+        //TODO: fix method
         if (item != null) {
             OrderRegel regel = new OrderRegel(item, amount);
             orderRegels.remove(regel);
@@ -70,25 +68,20 @@ public class Order {
         return orderRegels;
     }
 
-    public void nextOrderNumber() {
+    public int nextOrderNumber() {
         if (orderNumber < 100) {
             orderNumber++;
         } else if (orderNumber == 99) {
             orderNumber = 0;
         }
+        return orderNumber;
     }
 
-    public void changeOrderStatus() {
-        if (orderStatus == true) {
-            orderStatus = false;
-        } else if (orderStatus == false) {
-            orderStatus = true;
-        }
-    }
-
-    public void getTotalPrice() {
+    public Double getTotalPrice() {
+        totalPrice = 0.0;
         for (OrderRegel orderregel : orderRegels) {
             totalPrice += orderregel.getItem().getPrice();
         }
+        return totalPrice;
     }
 }

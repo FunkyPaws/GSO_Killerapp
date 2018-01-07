@@ -3,22 +3,33 @@ package OrderApp;
 import Shared.IEstabOrder;
 import Shared.Item;
 import Shared.ItemCategory;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class KioskApp extends Application implements IEstabOrder {
 
     private Order order;
+    private Double money;
+    private int number;
+    private int seconds;
 
     // Scene KioskStart
     private Scene KioskStart;
+    private ListView<OrderRegel> listView;
+    private Button endOrder;
+    private Button proceedOrder;
     // btn foods
     private Button btnHamburger;
     private Button btnCheeseburger;
@@ -44,15 +55,22 @@ public class KioskApp extends Application implements IEstabOrder {
     private Button btnijsje;
     private Button btntomaat;
     private Button btndanone;
-    private ListView<OrderRegel> listView;
-    private Button endOrder;
-    private Button proceedOrder;
 
     // scene bestelling afronden
     private Scene KioskEndOrder;
     private Button btnJa;
     private Button btnNee;
     private ListView<OrderRegel> listViewDone;
+
+    // scene pay order
+    private Scene KioskPayOrder;
+    private Button btnPay;
+    private Button btnCancel;
+    private TextField txtMoney;
+
+    //scene kiosk number
+    private Scene KioskNumber;
+    private TextField txtNumber;
 
     // all items
     private Item hamburger;
@@ -80,7 +98,6 @@ public class KioskApp extends Application implements IEstabOrder {
     private Item tomaat;
     private Item danone;
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         // make kioskStart scene
@@ -91,20 +108,29 @@ public class KioskApp extends Application implements IEstabOrder {
         Parent kioskEndORder = FXMLLoader.load(getClass().getResource("../Views/KioskEndOrder.fxml"));
         KioskEndOrder = new Scene(kioskEndORder);
 
+        // make kioskpayOrder scene
+        Parent kioskPayOrder = FXMLLoader.load(getClass().getResource("../Views/KioskPayOrder.fxml"));
+        KioskPayOrder = new Scene(kioskPayOrder);
+
+        // make kiosk number scene
+        Parent kioskNumber = FXMLLoader.load(getClass().getResource("../Views/KioskGiveNumber.fxml"));
+        KioskNumber = new Scene(kioskNumber);
 
         // set primary stage
         primaryStage.setTitle("MC Donalds");
         primaryStage.setScene(KioskStart);
         primaryStage.show();
 
-        order = new Order(false);
+        // set variable
+        money = 0.0;
+        seconds = 10;
+        number = 0;
 
-        newOrder();
+        order = new Order();
         initiateItems();
         initiateNodes();
         Events(primaryStage);
     }
-
 
     public static void main(String[] args) {
         launch(args);
@@ -112,16 +138,39 @@ public class KioskApp extends Application implements IEstabOrder {
 
     @Override
     public void placeOrder() {
-        //TODO fill in methode.
+        //TODO fill in methode for rmi.
     }
 
-    public void newOrder() {
+    public void resetOrder() {
+        //TODO: fix methode
         if (!order.getObserverListOrderregels().isEmpty()) {
             for (OrderRegel orderRegel : order.getObserverListOrderregels()) {
                 order.removeItem(orderRegel.getItem(), orderRegel.getAmount());
                 listView.refresh();
             }
         }
+    }
+
+    private void doTime(Stage primaryStage) {
+        Timeline time = new Timeline();
+        time.setCycleCount(Timeline.INDEFINITE);
+        if (time != null) {
+            time.stop();
+        }
+        KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                seconds--;
+                if (seconds <= 0) {
+                    primaryStage.setScene(KioskStart);
+                    resetOrder();
+                    //TODO: fix reset order
+                    time.stop();
+                }
+            }
+        });
+        time.getKeyFrames().add(frame);
+        time.playFromStart();
     }
 
     public void initiateItems() {
@@ -132,7 +181,7 @@ public class KioskApp extends Application implements IEstabOrder {
         mcKroket = new Item("Mc Kroket", 2.00, ItemCategory.Burger);
         mcFish = new Item("Mc fish", 3.45, ItemCategory.Burger);
         mcWrap = new Item("Mc Wrap", 3.95, ItemCategory.Burger);
-        QP = new Item("QP", 3.45, ItemCategory.Burger);
+        QP = new Item("Quarter Pounder", 3.45, ItemCategory.Burger);
         veggie = new Item("Veggie", 3.50, ItemCategory.Burger);
 
         kip6 = new Item("kip 6", 2.00, ItemCategory.Burger);
@@ -190,10 +239,35 @@ public class KioskApp extends Application implements IEstabOrder {
         btnJa = (Button) KioskEndOrder.lookup("#btnJa");
         btnNee = (Button) KioskEndOrder.lookup("#btnNee");
         listViewDone = (ListView<OrderRegel>) KioskEndOrder.lookup("#finalList");
+
+        //scene kioskpayorder
+        btnPay = (Button) KioskPayOrder.lookup("#btnPay");
+        btnCancel = (Button) KioskPayOrder.lookup("#btnBack");
+        txtMoney = (TextField) KioskPayOrder.lookup("#txtMoney");
+
+        //scene kiosknumber
+        txtNumber = (TextField) KioskNumber.lookup("#txtNumber");
     }
 
     public void Events(Stage primaryStage) {
-       //Scene kiosk end order
+        //Scene kiosk pay order
+        btnPay.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                number =order.nextOrderNumber();
+                txtNumber.setText(Integer.toString(number));
+                primaryStage.setScene(KioskNumber);
+                doTime(primaryStage);
+            }
+        });
+        btnCancel.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+;                primaryStage.setScene(KioskStart);
+            }
+        });
+
+        //Scene kiosk end order
         listViewDone.setItems(order.getObserverListOrderregels());
         btnNee.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
@@ -204,16 +278,18 @@ public class KioskApp extends Application implements IEstabOrder {
         btnJa.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-
+                primaryStage.setScene(KioskPayOrder);
+                money = order.getTotalPrice();
+                txtMoney.setText(money.toString());
             }
         });
 
-       //Scene kiosk start
+        //Scene kiosk start
         listView.setItems(order.getObserverListOrderregels());
         endOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                newOrder();
+                //TODO: somehopw get order.removeall get to work. does not work well.
             }
         });
         proceedOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -223,6 +299,7 @@ public class KioskApp extends Application implements IEstabOrder {
 
             }
         });
+
         // food buttons
         btnHamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
