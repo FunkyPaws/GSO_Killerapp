@@ -1,6 +1,9 @@
 package OrderApp;
 
 import Shared.Item;
+import com.sun.org.apache.xpath.internal.operations.Or;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,7 @@ public class Order {
     private Double totalPrice;
     private Boolean orderStatus;
 
+    private ObservableList<OrderRegel> observerListOrderregels;
     private List<OrderRegel> orderRegels;
 
     public Order(Integer orderNumber, Double totalPrice, Boolean orderStatus) {
@@ -18,34 +22,40 @@ public class Order {
         this.totalPrice = totalPrice;
         this.orderStatus = orderStatus;
         orderRegels = new ArrayList<>();
+        observerListOrderregels = FXCollections.observableList(orderRegels);
     }
 
     public Order(Boolean orderStatus) {
         this.totalPrice = 0.0;
         this.orderStatus = orderStatus;
         orderRegels = new ArrayList<>();
+        observerListOrderregels = FXCollections.observableList(orderRegels);
     }
 
     public void addItem(Item item, int amount) {
-        int i = 0;
-        if (!orderRegels.isEmpty()) {
-            for (OrderRegel orderRegel : orderRegels) {
-                if (orderRegel.getItem().equals(item)) {
-                    i = orderRegel.getAmount();
-                    i += amount;
-                    orderRegel.setAmount(i);
+        OrderRegel orderRegel = new OrderRegel(item, amount);
+
+        if (observerListOrderregels.contains(orderRegel)) {
+            for (int i = 0; i < observerListOrderregels.size(); i++) {
+                OrderRegel regel = observerListOrderregels.get(i);
+                if (orderRegel.equals(regel)) {
+                    int j = regel.getAmount();
+                    observerListOrderregels.remove(regel);
+
+                    int k = orderRegel.getAmount();
+                    k += j;
+                    orderRegel.setAmount(k);
+                    observerListOrderregels.add(orderRegel);
                 }
             }
-        } else if (!orderRegels.contains(item)) {
-            OrderRegel regel = new OrderRegel(item, amount);
-            orderRegels.add(regel);
+        } else {
+            observerListOrderregels.add(orderRegel);
         }
-
     }
 
     public void removeItem(Item item, int amount) {
         if (item != null) {
-            orderRegels.remove(item);
+            observerListOrderregels.remove(item);
         }
     }
 

@@ -147,7 +147,17 @@ public class KioskApp extends Application implements IEstabOrder {
                 order.addItem(hamburger, 1);
             }
         });
+        btnCheeseburger.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                order.addItem(cheesburger, 1);
+            }
+        });
+        btnBigMac.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                order.addItem(bigmac, 1);
+            }
+        });
     }
-
-
 }
