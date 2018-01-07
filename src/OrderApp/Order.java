@@ -1,10 +1,11 @@
 package OrderApp;
 
 import Shared.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order{
+public class Order {
 
     private Integer orderNumber = 0;
     private Double totalPrice;
@@ -19,13 +20,6 @@ public class Order{
         orderRegels = new ArrayList<>();
     }
 
-    public Order(Integer orderNumber, Boolean orderStatus) {
-        this.orderNumber = orderNumber;
-        this.totalPrice = 0.0;
-        this.orderStatus = orderStatus;
-        orderRegels = new ArrayList<>();
-    }
-
     public Order(Boolean orderStatus) {
         this.totalPrice = 0.0;
         this.orderStatus = orderStatus;
@@ -34,22 +28,23 @@ public class Order{
 
     public void addItem(Item item, int amount) {
         int i = 0;
-        if(orderRegels.contains(item)){
+        if (!orderRegels.isEmpty()) {
             for (OrderRegel orderRegel : orderRegels) {
-                if(orderRegel.getItem().equals(item)){
-                   i = orderRegel.getAmount();
-                   i += amount;
-                   orderRegel.setAmount(i);
+                if (orderRegel.getItem().equals(item)) {
+                    i = orderRegel.getAmount();
+                    i += amount;
+                    orderRegel.setAmount(i);
                 }
             }
-        } else if(!orderRegels.contains(item)){
-        OrderRegel regel = new OrderRegel(item, amount);
-        orderRegels.add(regel);
+        } else if (!orderRegels.contains(item)) {
+            OrderRegel regel = new OrderRegel(item, amount);
+            orderRegels.add(regel);
         }
+
     }
 
     public void removeItem(Item item, int amount) {
-        if(item != null) {
+        if (item != null) {
             orderRegels.remove(item);
         }
     }
@@ -59,9 +54,9 @@ public class Order{
     }
 
     public void nextOrderNumber() {
-        if(orderNumber < 100){
-            orderNumber ++;
-        } else if(orderNumber == 99){
+        if (orderNumber < 100) {
+            orderNumber++;
+        } else if (orderNumber == 99) {
             orderNumber = 0;
         }
     }
@@ -74,8 +69,8 @@ public class Order{
         }
     }
 
-    public void getTotalPrice(){
-        for (OrderRegel orderregel: orderRegels) {
+    public void getTotalPrice() {
+        for (OrderRegel orderregel : orderRegels) {
             totalPrice += orderregel.getItem().getPrice();
         }
     }

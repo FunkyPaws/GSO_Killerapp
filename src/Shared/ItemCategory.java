@@ -6,5 +6,6 @@ public enum ItemCategory implements Serializable {
     Burger,
     Drink,
     Salad,
-    Fries
+    Fries,
+    Other
 }

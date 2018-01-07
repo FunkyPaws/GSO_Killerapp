@@ -28,30 +28,30 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
          <children>
-            <Button fx:id="btnHB" mnemonicParsing="false" text="Hamburger" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="btnCB" mnemonicParsing="false" text="Cheeseburger" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="btnBM" mnemonicParsing="false" text="Big Mac" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="btnMcC" mnemonicParsing="false" text="Mc Chicken" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="btnMcK" mnemonicParsing="false" text="Mc Kroket" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="btnFish" mnemonicParsing="false" text="Filet o Fish" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="btnKip6" mnemonicParsing="false" text="Kip nuggets 6 st." GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Button fx:id="btnKip9" mnemonicParsing="false" text="Kip nuggets 9 st." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Button fx:id="btnKip20" mnemonicParsing="false" text="Kip nuggets 20 st." GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Button fx:id="btnWrap" mnemonicParsing="false" text="Mc Wrap kip" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="btnFrietK" mnemonicParsing="false" text="Friet klein" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Button fx:id="btnFrietM" mnemonicParsing="false" text="Friet meduim" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Button fx:id="btnQP" mnemonicParsing="false" text="QP" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="btnVeggie" mnemonicParsing="false" text="Groente burger" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Button fx:id="btnFrietG" mnemonicParsing="false" text="Friet groot" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Button fx:id="btnDanone" mnemonicParsing="false" text="Danoontje" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Button fx:id="btnSide" mnemonicParsing="false" text="Side salade" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Button fx:id="btnKipSalade" mnemonicParsing="false" text="Kip salade" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Button fx:id="btnTonijnSalade" mnemonicParsing="false" text="Tonijn salade" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Button fx:id="btnTomaat" mnemonicParsing="false" text="Snoep tomaatjes" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Button fx:id="btnFrisK" mnemonicParsing="false" text="Fris Klein" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-            <Button fx:id="brnFrisM" mnemonicParsing="false" text="Fris Medium" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-            <Button fx:id="btnFrisG" mnemonicParsing="false" text="Fris Groot" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-            <Button fx:id="btnIjs" mnemonicParsing="false" text="IJsje" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Button id="btnHB" mnemonicParsing="false" text="Hamburger" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button id="btnCB" mnemonicParsing="false" text="Cheeseburger" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button id="btnBM" mnemonicParsing="false" text="Big Mac" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button id="btnMcC" mnemonicParsing="false" text="Mc Chicken" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button id="btnMcK" mnemonicParsing="false" text="Mc Kroket" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button id="btnFish" mnemonicParsing="false" text="Filet o Fish" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button id="btnKip6" mnemonicParsing="false" text="Kip nuggets 6 st." GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button id="btnKip9" mnemonicParsing="false" text="Kip nuggets 9 st." GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button id="btnKip20" mnemonicParsing="false" text="Kip nuggets 20 st." GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button id="btnWrap" mnemonicParsing="false" text="Mc Wrap kip" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button id="btnFrietK" mnemonicParsing="false" text="Friet klein" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button id="btnFrietM" mnemonicParsing="false" text="Friet meduim" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button id="btnQP" mnemonicParsing="false" text="QP" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button id="btnVeggie" mnemonicParsing="false" text="Groente burger" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button id="btnFrietG" mnemonicParsing="false" text="Friet groot" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button id="btnDanone" mnemonicParsing="false" text="Danoontje" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button id="btnSide" mnemonicParsing="false" text="Side salade" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Button id="btnKipSalade" mnemonicParsing="false" text="Kip salade" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Button id="btnTonijnSalade" mnemonicParsing="false" text="Tonijn salade" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Button id="btnTomaat" mnemonicParsing="false" text="Snoep tomaatjes" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Button id="btnFrisK" mnemonicParsing="false" text="Fris Klein" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Button id="brnFrisM" mnemonicParsing="false" text="Fris Medium" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Button id="btnFrisG" mnemonicParsing="false" text="Fris Groot" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Button id="btnIjs" mnemonicParsing="false" text="IJsje" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
          </children>
         </GridPane>
     </children>
