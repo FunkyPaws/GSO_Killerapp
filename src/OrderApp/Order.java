@@ -37,19 +37,21 @@ public class Order {
     }
 
     public void addItem(Item item, int amount) {
+        int j =0;
         OrderRegel orderRegel = new OrderRegel(item, amount);
 
         if (observerListOrderregels.contains(orderRegel)) {
             for (int i = 0; i < observerListOrderregels.size(); i++) {
                 OrderRegel regel = observerListOrderregels.get(i);
                 if (orderRegel.equals(regel)) {
-                    int j = regel.getAmount();
+                    j = regel.getAmount();
                     observerListOrderregels.remove(regel);
 
                     int k = orderRegel.getAmount();
                     k += j;
                     orderRegel.setAmount(k);
                     observerListOrderregels.add(orderRegel);
+                    break;
                 }
             }
         } else {
@@ -59,7 +61,8 @@ public class Order {
 
     public void removeItem(Item item, int amount) {
         if (item != null) {
-            observerListOrderregels.remove(item);
+            OrderRegel regel = new OrderRegel(item, amount);
+            orderRegels.remove(regel);
         }
     }
 
