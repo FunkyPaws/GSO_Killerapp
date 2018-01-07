@@ -61,4 +61,9 @@ public class Item implements IItem, Serializable {
         result = 31 * result + (category != null ? category.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return  name.toString();
+    }
 }

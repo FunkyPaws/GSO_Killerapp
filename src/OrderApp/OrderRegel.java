@@ -49,4 +49,10 @@ public class OrderRegel implements IOrderRegel {
     public int hashCode() {
         return item != null ? item.hashCode() : 0;
     }
+
+    @Override
+    public String toString() {
+        return item +
+                ", amount=" + amount;
+    }
 }

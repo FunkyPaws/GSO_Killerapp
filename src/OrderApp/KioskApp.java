@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -47,6 +48,8 @@ public class KioskApp extends Application implements IEstabOrder {
     private Button btnijsje;
     private Button btntomaat;
     private Button btndanone;
+    //listbox
+    private ListView<OrderRegel> listView;
 
     // all items
     private Item hamburger;
@@ -133,6 +136,8 @@ public class KioskApp extends Application implements IEstabOrder {
     }
 
     public void initiateNodes() {
+        listView = (ListView<OrderRegel>) KioskStart.lookup("#list");
+
         btnHamburger = (Button) KioskStart.lookup("#btnHB");
         btnCheeseburger = (Button) KioskStart.lookup("#btnCB");
         btnBigMac = (Button) KioskStart.lookup("#btnBM");
@@ -141,6 +146,8 @@ public class KioskApp extends Application implements IEstabOrder {
     }
 
     public void Events() {
+        listView.setItems(order.getObserverListOrderregels());
+
         btnHamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

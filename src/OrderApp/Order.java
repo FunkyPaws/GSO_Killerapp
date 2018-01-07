@@ -32,6 +32,10 @@ public class Order {
         observerListOrderregels = FXCollections.observableList(orderRegels);
     }
 
+    public ObservableList<OrderRegel> getObserverListOrderregels() {
+        return observerListOrderregels;
+    }
+
     public void addItem(Item item, int amount) {
         OrderRegel orderRegel = new OrderRegel(item, amount);
 
