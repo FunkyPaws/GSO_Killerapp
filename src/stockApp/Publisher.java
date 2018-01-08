@@ -1,8 +1,8 @@
-package StockApp;
+package stockApp;
 
-import Shared.ICreator;
-import Shared.ISubscriber;
-import Shared.Stock;
+import shared.ICreator;
+import shared.ISubscriber;
+import shared.Stock;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

@@ -1,6 +1,6 @@
-package OrderApp;
+package orderApp;
 
-import Shared.Item;
+import shared.Item;
 import java.io.Serializable;
 
 /**

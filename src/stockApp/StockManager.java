@@ -1,8 +1,8 @@
-package StockApp;
+package stockApp;
 
-import Shared.Item;
-import Shared.ItemCategory;
-import Shared.Stock;
+import shared.Item;
+import shared.ItemCategory;
+import shared.Stock;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -21,12 +21,12 @@ public class StockManager extends UnicastRemoteObject implements IStockCentral {
     }
 
     @Override
-    public Stock getStock(String estabName) {
+    public Stock getStock(Establishment establishment) {
         List<Stock> stocks = new ArrayList<>();
         Item item = new Item("Hamburger", 1.20, "is eetbaar", ItemCategory.Burger);
         Stock stock = new Stock(item.getName(), 10);
         stocks.add(stock);
-        publisher.update("Henkus", stocks);
+        publisher.update(establishment.getName(), stocks);
         return null;
     }
 }

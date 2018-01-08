@@ -1,6 +1,6 @@
-package Shared;
+package shared;
 
-import OrderApp.OrderRegel;
+import orderApp.OrderRegel;
 
 import java.rmi.Remote;
 import java.util.List;

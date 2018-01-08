@@ -1,4 +1,4 @@
-package Shared;
+package shared;
 
 /**
  * Interface is serializable.

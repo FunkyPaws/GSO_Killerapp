@@ -1,6 +1,6 @@
-package OrderApp;
+package orderApp;
 
-import Shared.Item;
+import shared.Item;
 
 public class OrderRegel implements IOrderRegel {
 

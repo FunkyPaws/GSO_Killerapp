@@ -1,7 +1,6 @@
-package OrderApp;
+package orderApp;
 
-import Shared.Item;
-import com.sun.org.apache.xpath.internal.operations.Or;
+import shared.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

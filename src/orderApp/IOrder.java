@@ -1,4 +1,4 @@
-package OrderApp;
+package orderApp;
 
 import java.io.Serializable;
 import java.util.List;

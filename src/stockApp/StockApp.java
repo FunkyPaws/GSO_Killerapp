@@ -1,7 +1,9 @@
-package StockApp;
+package stockApp;
 
-import Shared.Item;
-import Shared.ItemCategory;
+import com.sun.deploy.util.SessionState;
+import javafx.scene.control.ListView;
+import shared.Item;
+import shared.ItemCategory;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -11,12 +13,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import shared.Stock;
 
+import javax.net.ssl.SSLPeerUnverifiedException;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSessionContext;
+import javax.security.cert.X509Certificate;
+import java.security.Principal;
+import java.security.cert.Certificate;
 import java.util.List;
 
 public class StockApp extends Application {
 
     private Manager manager;
+    private Establishment establishment;
     private List<Manager> managers;
     private StockManager stockManager;
 
@@ -29,7 +39,13 @@ public class StockApp extends Application {
     private String strww;
 
     // scene overview
-    private Scene Overview;
+    private Scene overView;
+    private ListView<Stock> stockList;
+    private Button Logout;
+    private Button addStock;
+
+    // scene stockEdit
+    private Scene stockEdit;
 
     // all items
     private Item hamburger;
@@ -59,26 +75,30 @@ public class StockApp extends Application {
 
 
     // test button
-    public Button buttonTest;
+    private Button buttonTest;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         // make manager
-        Manager manager = new Manager("henk", "henk", "Henk Ietsens");
+        manager = new Manager("henk", "henk", "Henk Ietsens");
+
+        //make establishment
+        establishment = new Establishment("Eindhoven", "Eindhoven");
 
         // make stockinlog scene
-        Parent stockInlog = FXMLLoader.load(getClass().getResource("../Views/ManagerInlog.fxml"));
+        Parent stockInlog = FXMLLoader.load(getClass().getResource("../views/ManagerInlog.fxml"));
         StockInlog = new Scene(stockInlog);
 
         // make overview scene
-        Parent overview =FXMLLoader.load(getClass().getResource("../Views/ManagerOverview.fxml"));
-        Overview = new Scene(overview);
+        Parent overview = FXMLLoader.load(getClass().getResource("../views/ManagerOverview.fxml"));
+        overView = new Scene(overview);
 
+        // make stock edit scene
+        Parent stockedit = FXMLLoader.load(getClass().getResource("../views/ManagerVoorraad.fxml"));
+        stockEdit = new Scene(stockedit);
 
-
-
-
-        primaryStage.setTitle("Mc Donald's");
+        // set primary stage
+        primaryStage.setTitle("Mc Donalds " + establishment.getName());
         primaryStage.setScene(StockInlog);
         primaryStage.show();
 
@@ -91,22 +111,29 @@ public class StockApp extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        establishment.addStock(hamburger.getName(),100);
+        establishment.addStock(bigmac.getName(), 200);
     }
 
     private void events(Stage primaryStage) {
+        stockList.setItems(establishment.getObservableListStockItems());
+
         //test
         buttonTest.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                stockManager.getStock("Mcd Eindhoven");
+                stockManager.getStock(establishment);
             }
         });
 
         btnLogin.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-
-                primaryStage.setScene(Overview);
+                if (manager.checkLogin(name.getText(), ww.getText())) {
+                    primaryStage.setScene(overView);
+                } else {
+                    System.out.println("login is niet correct");
+                }
             }
         });
 
@@ -130,6 +157,7 @@ public class StockApp extends Application {
         name = (TextField) StockInlog.lookup("#txtInlogname");
         ww = (TextField) StockInlog.lookup("#txtWW");
 
+        stockList = (ListView<Stock>) overView.lookup("#listviewStock1");
 
     }
 

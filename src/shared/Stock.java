@@ -1,4 +1,4 @@
-package Shared;
+package shared;
 
 import java.io.Serializable;
 
@@ -25,5 +25,11 @@ public class Stock implements IStock, Serializable {
     @Override
     public Integer getAmount() {
         return amount;
+    }
+
+    @Override
+    public String toString() {
+        return "amount= " + amount +
+                ", item=" + itemName ;
     }
 }

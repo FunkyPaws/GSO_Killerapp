@@ -1,9 +1,9 @@
 package MCDCentral;
 
-import Shared.ICreator;
-import Shared.ISubscriber;
-import Shared.Stock;
-import StockApp.IStockCentral;
+import shared.ICreator;
+import shared.ISubscriber;
+import shared.Stock;
+import stockApp.IStockCentral;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

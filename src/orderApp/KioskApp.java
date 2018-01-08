@@ -1,8 +1,8 @@
-package OrderApp;
+package orderApp;
 
-import Shared.IEstabOrder;
-import Shared.Item;
-import Shared.ItemCategory;
+import shared.IEstabOrder;
+import shared.Item;
+import shared.ItemCategory;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -101,19 +101,19 @@ public class KioskApp extends Application implements IEstabOrder {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // make kioskStart scene
-        Parent kioskStart = FXMLLoader.load(getClass().getResource("../Views/KioskStart.fxml"));
+        Parent kioskStart = FXMLLoader.load(getClass().getResource("../views/KioskStart.fxml"));
         KioskStart = new Scene(kioskStart);
 
         // make kioskEndOrder scene
-        Parent kioskEndORder = FXMLLoader.load(getClass().getResource("../Views/KioskEndOrder.fxml"));
+        Parent kioskEndORder = FXMLLoader.load(getClass().getResource("../views/KioskEndOrder.fxml"));
         KioskEndOrder = new Scene(kioskEndORder);
 
         // make kioskpayOrder scene
-        Parent kioskPayOrder = FXMLLoader.load(getClass().getResource("../Views/KioskPayOrder.fxml"));
+        Parent kioskPayOrder = FXMLLoader.load(getClass().getResource("../views/KioskPayOrder.fxml"));
         KioskPayOrder = new Scene(kioskPayOrder);
 
         // make kiosk number scene
-        Parent kioskNumber = FXMLLoader.load(getClass().getResource("../Views/KioskGiveNumber.fxml"));
+        Parent kioskNumber = FXMLLoader.load(getClass().getResource("../views/KioskGiveNumber.fxml"));
         KioskNumber = new Scene(kioskNumber);
 
         // set primary stage

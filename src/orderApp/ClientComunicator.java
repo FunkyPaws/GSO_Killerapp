@@ -1,6 +1,6 @@
-package OrderApp;
+package orderApp;
 
-import Shared.IEstabOrder;
+import shared.IEstabOrder;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;

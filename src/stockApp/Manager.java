@@ -1,4 +1,4 @@
-package StockApp;
+package stockApp;
 
 public class Manager {
     private String loginName;
@@ -24,7 +24,7 @@ public class Manager {
     }
 
     public boolean checkLogin(String loginName, String password) {
-        return loginName == this.loginName && password == this.password;
+        return loginName.equals(this.loginName) && password.equals(this.password);
     }
 
     @Override
