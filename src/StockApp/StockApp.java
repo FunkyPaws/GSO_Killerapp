@@ -74,7 +74,7 @@ public class StockApp extends Application {
         Parent overview =FXMLLoader.load(getClass().getResource("../Views/ManagerOverview.fxml"));
         Overview = new Scene(overview);
 
-        
+
 
 
 
