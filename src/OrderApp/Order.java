@@ -80,8 +80,18 @@ public class Order {
     public Double getTotalPrice() {
         totalPrice = 0.0;
         for (OrderRegel orderregel : orderRegels) {
-            totalPrice += orderregel.getItem().getPrice();
+            totalPrice += orderregel.getItem().getPrice()*orderregel.getAmount();
         }
         return totalPrice;
+    }
+
+    public void removeAllItems() {
+        for (int i = 0; i < orderRegels.size(); ) {
+            OrderRegel orderRegel = orderRegels.get(i);
+
+            if (!orderRegels.remove(orderRegel)) {
+                i++;
+            }
+        }
     }
 }

@@ -59,9 +59,9 @@ public class MCDCentral extends UnicastRemoteObject implements ISubscriber {
 
     @Override
     public void update(String vestigingNaam, List<Stock> stocks) {
-        System.out.println("Vestiging : " + vestigingNaam + "\n Voorraad: ");
+        System.out.println("Vestiging : " + vestigingNaam + "\nVoorraad: ");
         for (Stock stock : stocks) {
-            System.out.println("Item: " + stock.getItemName() + "Amount: " + stock.getAmount());
+            System.out.println("Item: " + stock.getItemName() + ", Amount: " + stock.getAmount());
         }
     }
 

@@ -123,7 +123,6 @@ public class KioskApp extends Application implements IEstabOrder {
 
         // set variable
         money = 0.0;
-        seconds = 10;
         number = 0;
 
         order = new Order();
@@ -142,16 +141,14 @@ public class KioskApp extends Application implements IEstabOrder {
     }
 
     public void resetOrder() {
-        //TODO: fix methode
-        if (!order.getObserverListOrderregels().isEmpty()) {
-            for (OrderRegel orderRegel : order.getObserverListOrderregels()) {
-                order.removeItem(orderRegel.getItem(), orderRegel.getAmount());
-                listView.refresh();
-            }
+        while (!order.getObserverListOrderregels().isEmpty()) {
+            order.removeAllItems();
         }
+        listView.refresh();
     }
 
     private void doTime(Stage primaryStage) {
+        seconds = 5;
         Timeline time = new Timeline();
         time.setCycleCount(Timeline.INDEFINITE);
         if (time != null) {
@@ -164,7 +161,6 @@ public class KioskApp extends Application implements IEstabOrder {
                 if (seconds <= 0) {
                     primaryStage.setScene(KioskStart);
                     resetOrder();
-                    //TODO: fix reset order
                     time.stop();
                 }
             }
@@ -173,7 +169,7 @@ public class KioskApp extends Application implements IEstabOrder {
         time.playFromStart();
     }
 
-    public void initiateItems() {
+    private void initiateItems() {
         hamburger = new Item("hamburger", 1.20, ItemCategory.Burger);
         cheesburger = new Item("cheesburger", 1.50, ItemCategory.Burger);
         bigmac = new Item("Big Mac", 3.45, ItemCategory.Burger);
@@ -205,7 +201,7 @@ public class KioskApp extends Application implements IEstabOrder {
         ijsje = new Item("klein ijshoorntje", 1.00, ItemCategory.Other);
     }
 
-    public void initiateNodes() {
+    private void initiateNodes() {
         //scene kioskstart
         listView = (ListView<OrderRegel>) KioskStart.lookup("#list");
         endOrder = (Button) KioskStart.lookup("#btnAnnuleren");
@@ -249,201 +245,54 @@ public class KioskApp extends Application implements IEstabOrder {
         txtNumber = (TextField) KioskNumber.lookup("#txtNumber");
     }
 
-    public void Events(Stage primaryStage) {
+    private void Events(Stage primaryStage) {
         //Scene kiosk pay order
-        btnPay.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                number =order.nextOrderNumber();
-                txtNumber.setText(Integer.toString(number));
-                primaryStage.setScene(KioskNumber);
-                doTime(primaryStage);
-            }
+        btnPay.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            number = order.nextOrderNumber();
+            txtNumber.setText(Integer.toString(number));
+            primaryStage.setScene(KioskNumber);
+            doTime(primaryStage);
         });
-        btnCancel.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-;                primaryStage.setScene(KioskStart);
-            }
-        });
+        btnCancel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> primaryStage.setScene(KioskStart));
 
         //Scene kiosk end order
         listViewDone.setItems(order.getObserverListOrderregels());
-        btnNee.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primaryStage.setScene(KioskStart);
-            }
-        });
-        btnJa.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primaryStage.setScene(KioskPayOrder);
-                money = order.getTotalPrice();
-                txtMoney.setText(money.toString());
-            }
+        btnNee.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> primaryStage.setScene(KioskStart));
+        btnJa.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            primaryStage.setScene(KioskPayOrder);
+            money = order.getTotalPrice();
+            txtMoney.setText(money.toString());
         });
 
         //Scene kiosk start
         listView.setItems(order.getObserverListOrderregels());
-        endOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                //TODO: somehopw get order.removeall get to work. does not work well.
-            }
-        });
-        proceedOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primaryStage.setScene(KioskEndOrder);
-
-            }
-        });
+        endOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> resetOrder());
+        proceedOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> primaryStage.setScene(KioskEndOrder));
 
         // food buttons
-        btnHamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(hamburger, 1);
-            }
-        });
-        btnCheeseburger.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(cheesburger, 1);
-            }
-        });
-        btnBigMac.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(bigmac, 1);
-            }
-        });
-        btnmcChicken.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(mcChicken, 1);
-            }
-        });
-        btnmcKroket.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(mcKroket, 1);
-            }
-        });
-        btnmcFish.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(mcFish, 1);
-            }
-        });
-        btnmcWrap.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(mcWrap, 1);
-            }
-        });
-        btnQP.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(QP, 1);
-            }
-        });
-        btnveggie.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(veggie, 1);
-            }
-        });
-        btnkip6.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(kip6, 1);
-            }
-        });
-        btnkip9.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(kip9, 1);
-            }
-        });
-        btnkip20.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(kip20, 1);
-            }
-        });
-        btnfrietK.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(frietK, 1);
-            }
-        });
-        btnfrietM.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(frietM, 1);
-            }
-        });
-        btnfrietG.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(frietG, 1);
-            }
-        });
-        btnsaladeSide.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(saladeSide, 1);
-            }
-        });
-        btnsaladeKip.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(saladeKip, 1);
-            }
-        });
-        btnsaladeTonijn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(saladeTonijn, 1);
-            }
-        });
-        btnfrisK.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(frisK, 1);
-            }
-        });
-        btnfrisM.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(frisM, 1);
-            }
-        });
-        btnfrisG.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(frisG, 1);
-            }
-        });
-        btndanone.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(danone, 1);
-            }
-        });
-        btntomaat.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(tomaat, 1);
-            }
-        });
-        btnijsje.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                order.addItem(ijsje, 1);
-            }
-        });
+        btnHamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(hamburger, 1));
+        btnCheeseburger.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(cheesburger, 1));
+        btnBigMac.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(bigmac, 1));
+        btnmcChicken.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(mcChicken, 1));
+        btnmcKroket.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(mcKroket, 1));
+        btnmcFish.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(mcFish, 1));
+        btnmcWrap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(mcWrap, 1));
+        btnQP.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(QP, 1));
+        btnveggie.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(veggie, 1));
+        btnkip6.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(kip6, 1));
+        btnkip9.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(kip9, 1));
+        btnkip20.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(kip20, 1));
+        btnfrietK.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(frietK, 1));
+        btnfrietM.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(frietM, 1));
+        btnfrietG.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(frietG, 1));
+        btnsaladeSide.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(saladeSide, 1));
+        btnsaladeKip.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(saladeKip, 1));
+        btnsaladeTonijn.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(saladeTonijn, 1));
+        btnfrisK.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(frisK, 1));
+        btnfrisM.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(frisM, 1));
+        btnfrisG.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(frisG, 1));
+        btndanone.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(danone, 1));
+        btntomaat.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(tomaat, 1));
+        btnijsje.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(ijsje, 1));
     }
 }

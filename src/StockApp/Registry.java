@@ -11,7 +11,10 @@ public class Registry {
     private static final int portNumber = 1099;
     private static final String bindingName = "Server";
     private static final String PROTOCOL = "java.rmi.server.hostname";
-    private static String HOST = "192.168.0.25";
+    private static String HOST = "127.0.0.1";
+
+    //if connected to wifi: 192.168.0.25
+    // if not connected to wifi: 127.0.0.1
 
     private java.rmi.registry.Registry registry = null;
     private IStockCentral manager;
