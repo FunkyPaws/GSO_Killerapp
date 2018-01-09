@@ -57,19 +57,19 @@ public class KioskApp extends Application implements IEstabOrder {
     private Button btndanone;
 
     // scene bestelling afronden
-    private Scene KioskEndOrder;
+    private Scene kioskEndOrder;
     private Button btnJa;
     private Button btnNee;
     private ListView<OrderRegel> listViewDone;
 
     // scene pay order
-    private Scene KioskPayOrder;
+    private Scene kioskPayOrder;
     private Button btnPay;
     private Button btnCancel;
     private TextField txtMoney;
 
     //scene kiosk number
-    private Scene KioskNumber;
+    private Scene kioskNumber;
     private TextField txtNumber;
 
     // all items
@@ -83,7 +83,7 @@ public class KioskApp extends Application implements IEstabOrder {
     private Item kip9;
     private Item kip20;
     private Item mcWrap;
-    private Item QP;
+    private Item qp;
     private Item veggie;
     private Item frietK;
     private Item frietM;
@@ -105,16 +105,16 @@ public class KioskApp extends Application implements IEstabOrder {
         KioskStart = new Scene(kioskStart);
 
         // make kioskEndOrder scene
-        Parent kioskEndORder = FXMLLoader.load(getClass().getResource("../views/KioskEndOrder.fxml"));
-        KioskEndOrder = new Scene(kioskEndORder);
+        Parent kioskendOrder = FXMLLoader.load(getClass().getResource("../views/KioskEndOrder.fxml"));
+        kioskEndOrder = new Scene(kioskendOrder);
 
         // make kioskpayOrder scene
-        Parent kioskPayOrder = FXMLLoader.load(getClass().getResource("../views/KioskPayOrder.fxml"));
-        KioskPayOrder = new Scene(kioskPayOrder);
+        Parent kioskpayOrder = FXMLLoader.load(getClass().getResource("../views/KioskPayOrder.fxml"));
+        kioskPayOrder = new Scene(kioskpayOrder);
 
         // make kiosk number scene
-        Parent kioskNumber = FXMLLoader.load(getClass().getResource("../views/KioskGiveNumber.fxml"));
-        KioskNumber = new Scene(kioskNumber);
+        Parent kiosknumber = FXMLLoader.load(getClass().getResource("../views/KioskGiveNumber.fxml"));
+        kioskNumber = new Scene(kiosknumber);
 
         // set primary stage
         primaryStage.setTitle("MC Donalds");
@@ -128,7 +128,7 @@ public class KioskApp extends Application implements IEstabOrder {
         order = new Order();
         initiateItems();
         initiateNodes();
-        Events(primaryStage);
+        events(primaryStage);
     }
 
     public static void main(String[] args) {
@@ -177,7 +177,7 @@ public class KioskApp extends Application implements IEstabOrder {
         mcKroket = new Item("Mc Kroket", 2.00, ItemCategory.Burger);
         mcFish = new Item("Mc fish", 3.45, ItemCategory.Burger);
         mcWrap = new Item("Mc Wrap", 3.95, ItemCategory.Burger);
-        QP = new Item("Quarter Pounder", 3.45, ItemCategory.Burger);
+        qp = new Item("Quarter Pounder", 3.45, ItemCategory.Burger);
         veggie = new Item("Veggie", 3.50, ItemCategory.Burger);
 
         kip6 = new Item("kip 6", 2.00, ItemCategory.Burger);
@@ -232,25 +232,25 @@ public class KioskApp extends Application implements IEstabOrder {
         btnijsje = (Button) KioskStart.lookup("#btnIjs");
 
         //scene kioskendorder
-        btnJa = (Button) KioskEndOrder.lookup("#btnJa");
-        btnNee = (Button) KioskEndOrder.lookup("#btnNee");
-        listViewDone = (ListView<OrderRegel>) KioskEndOrder.lookup("#finalList");
+        btnJa = (Button) kioskEndOrder.lookup("#btnJa");
+        btnNee = (Button) kioskEndOrder.lookup("#btnNee");
+        listViewDone = (ListView<OrderRegel>) kioskEndOrder.lookup("#finalList");
 
         //scene kioskpayorder
-        btnPay = (Button) KioskPayOrder.lookup("#btnPay");
-        btnCancel = (Button) KioskPayOrder.lookup("#btnBack");
-        txtMoney = (TextField) KioskPayOrder.lookup("#txtMoney");
+        btnPay = (Button) kioskPayOrder.lookup("#btnPay");
+        btnCancel = (Button) kioskPayOrder.lookup("#btnBack");
+        txtMoney = (TextField) kioskPayOrder.lookup("#txtMoney");
 
         //scene kiosknumber
-        txtNumber = (TextField) KioskNumber.lookup("#txtNumber");
+        txtNumber = (TextField) kioskNumber.lookup("#txtNumber");
     }
 
-    private void Events(Stage primaryStage) {
+    private void events(Stage primaryStage) {
         //Scene kiosk pay order
         btnPay.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             number = order.nextOrderNumber();
             txtNumber.setText(Integer.toString(number));
-            primaryStage.setScene(KioskNumber);
+            primaryStage.setScene(kioskNumber);
             doTime(primaryStage);
         });
         btnCancel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> primaryStage.setScene(KioskStart));
@@ -259,7 +259,7 @@ public class KioskApp extends Application implements IEstabOrder {
         listViewDone.setItems(order.getObserverListOrderregels());
         btnNee.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> primaryStage.setScene(KioskStart));
         btnJa.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            primaryStage.setScene(KioskPayOrder);
+            primaryStage.setScene(kioskPayOrder);
             money = order.getTotalPrice();
             txtMoney.setText(money.toString());
         });
@@ -267,7 +267,7 @@ public class KioskApp extends Application implements IEstabOrder {
         //Scene kiosk start
         listView.setItems(order.getObserverListOrderregels());
         endOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> resetOrder());
-        proceedOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> primaryStage.setScene(KioskEndOrder));
+        proceedOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> primaryStage.setScene(kioskEndOrder));
 
         // food buttons
         btnHamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(hamburger, 1));
@@ -277,7 +277,7 @@ public class KioskApp extends Application implements IEstabOrder {
         btnmcKroket.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(mcKroket, 1));
         btnmcFish.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(mcFish, 1));
         btnmcWrap.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(mcWrap, 1));
-        btnQP.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(QP, 1));
+        btnQP.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(qp, 1));
         btnveggie.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(veggie, 1));
         btnkip6.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(kip6, 1));
         btnkip9.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.addItem(kip9, 1));

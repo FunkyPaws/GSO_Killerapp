@@ -4,9 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.Item;
 import shared.Stock;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Establishment {

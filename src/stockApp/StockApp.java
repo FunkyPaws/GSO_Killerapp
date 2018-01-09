@@ -1,6 +1,5 @@
 package stockApp;
 
-import com.sun.deploy.util.SessionState;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import shared.Item;
@@ -15,13 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import shared.Stock;
-
-import javax.net.ssl.SSLPeerUnverifiedException;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSessionContext;
-import javax.security.cert.X509Certificate;
-import java.security.Principal;
-import java.security.cert.Certificate;
 import java.util.List;
 
 public class StockApp extends Application {
@@ -36,8 +28,6 @@ public class StockApp extends Application {
     private Button btnLogin;
     private TextField name;
     private TextField ww;
-    private String strname;
-    private String strww;
 
     // scene overview
     private Scene overView;
@@ -141,7 +131,6 @@ public class StockApp extends Application {
             @Override
             public void handle(MouseEvent event) {
 
-                System.out.println("er word toegevoegd");
                 establishment.addStock(hamburger, 100);
                 System.out.println("stuff changed" + establishment.getStockItems().size());
                 stockManager.getStock(establishment);

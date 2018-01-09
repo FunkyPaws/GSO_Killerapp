@@ -1,7 +1,5 @@
 package stockApp;
 
-import shared.Stock;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
