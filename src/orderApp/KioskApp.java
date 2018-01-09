@@ -1,6 +1,5 @@
 package orderApp;
 
-import shared.IEstabOrder;
 import shared.Item;
 import shared.ItemCategory;
 import javafx.animation.KeyFrame;
@@ -18,7 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class KioskApp extends Application implements IEstabOrder {
+public class KioskApp extends Application {
 
     private Order order;
     private Double money;
@@ -135,7 +134,6 @@ public class KioskApp extends Application implements IEstabOrder {
         launch(args);
     }
 
-    @Override
     public void placeOrder() {
         //TODO fill in methode for rmi.
     }

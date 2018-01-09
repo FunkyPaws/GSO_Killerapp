@@ -1,11 +1,12 @@
 package stockApp;
 
-import javafx.collections.ListChangeListener;
-import shared.Stock;
+import orderApp.OrderRegel;
+import orderApp.iOrderCentral;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
-public class StockManager extends UnicastRemoteObject implements IStockCentral{
+public class StockManager extends UnicastRemoteObject implements IStockCentral, iOrderCentral {
 
     private Registry registry;
     private Publisher publisher;
@@ -22,5 +23,10 @@ public class StockManager extends UnicastRemoteObject implements IStockCentral{
         this.establishment = establishment;
         //establishment.subscribe(this);
         publisher.update(establishment.getName(), establishment.getStockItems());
+    }
+
+    @Override
+    public void getOrderRegels(List<OrderRegel> orderRegels) throws RemoteException {
+
     }
 }

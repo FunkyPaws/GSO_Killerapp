@@ -1,6 +1,5 @@
 package orderApp;
 
-import shared.IEstabOrder;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -9,7 +8,7 @@ import java.rmi.registry.Registry;
 public class ClientComunicator {
     private final String hostID = "localhost";
     private final int port = 1099;
-    private IEstabOrder iEstabOrder;
+    private iOrderCentral iorderCentral;
     private Registry registry = null;
 
     public ClientComunicator() {
@@ -26,26 +25,26 @@ public class ClientComunicator {
             System.out.println("Client: Registry located");
             try
             {
-                iEstabOrder = (IEstabOrder) registry.lookup("Server");
+                iorderCentral = (iOrderCentral) registry.lookup("Server");
             }
             catch (RemoteException ex)
             {
                 System.out.println("Client: Cannot bind server");
                 System.out.println("Client: RemoteException: " + ex.getMessage());
-                iEstabOrder = null;
+                iorderCentral = null;
             }
             catch (NotBoundException ex)
             {
                 System.out.println("Client: Cannot bind server");
                 System.out.println("Client: NotBoundException: " + ex.getMessage());
-                iEstabOrder = null;
+                iorderCentral = null;
             }
         } else {
             System.out.println("Client: Cannot locate registry");
             System.out.println("Client: Registry is null pointer");
         }
 
-        if (iEstabOrder != null) {
+        if (iorderCentral != null) {
             System.out.println("Client: server bound");
         } else {
             System.out.println("Client: server is null pointer");
