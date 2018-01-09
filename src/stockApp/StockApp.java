@@ -1,11 +1,10 @@
 package stockApp;
 
+import javafx.application.Application;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import shared.Item;
 import shared.ItemCategory;
-import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,10 +13,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import shared.Stock;
+
 import java.util.List;
 
 public class StockApp extends Application {
 
+    //region Fields
     private Manager manager;
     private Establishment establishment;
     private List<Manager> managers;
@@ -71,7 +72,7 @@ public class StockApp extends Application {
     private Item ijsje;
     private Item tomaat;
     private Item danone;
-
+// endregion
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -112,41 +113,27 @@ public class StockApp extends Application {
     private void events(Stage primaryStage) {
         // scene login
         stockList.setItems(establishment.getObservableListStockItems());
-        btnLogin.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                //TODO: sessions?
-                if (manager.checkLogin(name.getText(), ww.getText())) {
-                    primaryStage.setScene(overView);
-                } else {
-                    System.out.println("login is niet correct");
-                }
+        btnLogin.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            //TODO: sessions?
+            if (manager.checkLogin(name.getText(), ww.getText())) {
+                primaryStage.setScene(overView);
+            } else {
+                System.out.println("login is niet correct");
             }
         });
 
         // scene overview
-        buttonTest.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                //TODO: fix the auto update
-                establishment.addStock(hamburger, 100);
-                System.out.println("stuff changed" + establishment.getStockItems().size());
-                stockManager.getStock(establishment);
-                stockList.refresh();
-            }
+        buttonTest.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            //TODO: fix the auto update
+            establishment.addStock(hamburger, 100);
+            System.out.println("stuff changed" + establishment.getStockItems().size());
+            stockManager.getStock(establishment);
+            stockList.refresh();
         });
-        addStock.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primaryStage.setScene(stockEdit);
-            }
-        });
-        Logout.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                //TODO: End sessions?
-                primaryStage.setScene(StockInlog);
-            }
+        addStock.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> primaryStage.setScene(stockEdit));
+        Logout.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            //TODO: End sessions?
+            primaryStage.setScene(StockInlog);
         });
 
         // scene voorraad
@@ -154,31 +141,19 @@ public class StockApp extends Application {
         cbItems.setItems(establishment.getItemObservableListItems());
         cbItems.setValue(establishment.getItemObservableListItems().get(0));
 
-        btnAddstock.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                int amount = 0;
-                try {
-                    amount = Integer.parseInt(txtAmount.getText());
-                }
-                catch (NumberFormatException e){
-                    System.out.println("that was not a number");
-                }
-                establishment.addStock(cbItems.getValue(), amount);
+        btnAddstock.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            int amount = 0;
+            try {
+                amount = Integer.parseInt(txtAmount.getText());
+            } catch (NumberFormatException e) {
+                System.out.println("that was not a number");
             }
+            establishment.addStock(cbItems.getValue(), amount);
         });
-        btnBack.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primaryStage.setScene(overView);
-            }
-        });
-        btnLohuit.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                //TODO: Sessions?
-                primaryStage.setScene(StockInlog);
-            }
+        btnBack.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> primaryStage.setScene(overView));
+        btnLohuit.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            //TODO: Sessions?
+            primaryStage.setScene(StockInlog);
         });
     }
 
@@ -207,7 +182,7 @@ public class StockApp extends Application {
         btnLohuit = (Button) stockEdit.lookup("#btnLogOut");
         btnBack = (Button) stockEdit.lookup("#btnBack");
         btnAddstock = (Button) stockEdit.lookup("#btnAddStock");
-        cbItems =(ComboBox<Item>) stockEdit.lookup("#cbProducts");
+        cbItems = (ComboBox<Item>) stockEdit.lookup("#cbProducts");
         txtAmount = (TextField) stockEdit.lookup("#txtAmount");
         stockListView = (ListView<Stock>) stockEdit.lookup("#stocklist");
     }

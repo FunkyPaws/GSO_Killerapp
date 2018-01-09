@@ -5,7 +5,7 @@ import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-public class Registry{
+public class Registry {
 
     // server
     private static final int portNumber = 1099;

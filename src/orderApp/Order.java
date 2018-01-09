@@ -15,13 +15,6 @@ public class Order {
     private ObservableList<OrderRegel> observerListOrderregels;
     private List<OrderRegel> orderRegels;
 
-    public Order(Integer orderNumber, Double totalPrice) {
-        this.orderNumber = orderNumber;
-        this.totalPrice = totalPrice;
-        orderRegels = new ArrayList<>();
-        observerListOrderregels = FXCollections.observableList(orderRegels);
-    }
-
     public Order() {
         this.totalPrice = 0.0;
         orderRegels = new ArrayList<>();

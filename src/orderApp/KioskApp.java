@@ -21,6 +21,7 @@ import java.rmi.RemoteException;
 
 public class KioskApp extends Application {
 
+    //region Fields
     //facade class
     private OrderManager orderManager;
 
@@ -101,6 +102,7 @@ public class KioskApp extends Application {
     private Item ijsje;
     private Item tomaat;
     private Item danone;
+    //endregion
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -254,7 +256,7 @@ public class KioskApp extends Application {
             txtNumber.setText(Integer.toString(number));
             primaryStage.setScene(kioskNumber);
             try {
-                orderManager.Flikkerdiemeukdeanderekantin(order.getOrderRegel());
+                orderManager.sendListToStock(order.getOrderRegel());
             } catch (RemoteException e) {
                 e.printStackTrace();
             }

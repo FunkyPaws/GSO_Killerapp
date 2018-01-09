@@ -12,7 +12,6 @@ import java.io.Serializable;
  * The methode returns nothing.
  */
 public interface IOrderRegel extends Serializable {
-    Item getItem(String itemName);
     Item getItem();
     Integer getAmount();
 }

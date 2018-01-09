@@ -11,8 +11,8 @@ public class OrderManager {
         com = new ClientComunicator();
     }
 
-    public void Flikkerdiemeukdeanderekantin(List<OrderRegel> orderRegels) throws RemoteException {
-        com.SendShit(orderRegels);
+    public void sendListToStock(List<OrderRegel> orderRegels) throws RemoteException {
+        com.sendListOrderRegels(orderRegels);
     }
 
 }

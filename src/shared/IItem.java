@@ -14,7 +14,4 @@ package shared;
 public interface IItem  {
     String getName();
     Double getPrice();
-    String getDescription();
-    ItemCategory getCategory();
-
 }

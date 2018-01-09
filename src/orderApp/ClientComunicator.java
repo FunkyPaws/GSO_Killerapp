@@ -4,7 +4,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ClientComunicator {
@@ -53,10 +52,7 @@ public class ClientComunicator {
         }
     }
 
-    public void SendShit(List<OrderRegel> orderRegels) throws RemoteException {
-
+    public void sendListOrderRegels(List<OrderRegel> orderRegels) throws RemoteException {
         iorderCentral.getOrderRegels(orderRegels);
-
     }
-
 }

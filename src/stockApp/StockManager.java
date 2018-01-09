@@ -2,7 +2,6 @@ package stockApp;
 
 import orderApp.OrderRegel;
 import orderApp.iOrderCentral;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -28,7 +27,6 @@ public class StockManager extends UnicastRemoteObject implements IStockCentral, 
 
     @Override
     public void getOrderRegels(List<OrderRegel> orderRegels) throws RemoteException {
-
         for (OrderRegel orderregel : orderRegels) {
             System.out.println(orderregel.toString());
         }
