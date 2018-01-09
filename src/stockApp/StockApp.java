@@ -1,6 +1,7 @@
 package stockApp;
 
 import com.sun.deploy.util.SessionState;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import shared.Item;
 import shared.ItemCategory;
@@ -43,9 +44,17 @@ public class StockApp extends Application {
     private ListView<Stock> stockList;
     private Button Logout;
     private Button addStock;
+    // test button
+    private Button buttonTest;
 
     // scene stockEdit
     private Scene stockEdit;
+    private Button btnLohuit;
+    private Button btnBack;
+    private Button btnAddstock;
+    private ComboBox<Item> cbItems;
+    private TextField txtAmount;
+    private ListView<Stock> stockListView;
 
     // all items
     private Item hamburger;
@@ -73,9 +82,6 @@ public class StockApp extends Application {
     private Item tomaat;
     private Item danone;
 
-
-    // test button
-    private Button buttonTest;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -111,24 +117,17 @@ public class StockApp extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        establishment.addStock(hamburger.getName(),100);
-        establishment.addStock(bigmac.getName(), 200);
+        establishment.addStock(hamburger, 100);
+        establishment.addStock(bigmac, 200);
     }
 
     private void events(Stage primaryStage) {
+        // scene login
         stockList.setItems(establishment.getObservableListStockItems());
-
-        //test
-        buttonTest.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                stockManager.getStock(establishment);
-            }
-        });
-
         btnLogin.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                //TODO: sessions?
                 if (manager.checkLogin(name.getText(), ww.getText())) {
                     primaryStage.setScene(overView);
                 } else {
@@ -137,9 +136,57 @@ public class StockApp extends Application {
             }
         });
 
+        // scene overview
+        buttonTest.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
 
+                System.out.println("er word toegevoegd");
+                establishment.addStock(hamburger, 100);
+                System.out.println("stuff changed" + establishment.getStockItems().size());
+                stockManager.getStock(establishment);
+                stockList.refresh();
+            }
+        });
+        addStock.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.setScene(stockEdit);
+            }
+        });
+        Logout.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                //TODO: End sessions?
+                primaryStage.setScene(StockInlog);
+            }
+        });
+
+        // scene voorraad
+        stockListView.setItems(establishment.getObservableListStockItems());
+        cbItems.setItems(establishment.getItemObservableListItems());
+        cbItems.setValue(establishment.getItemObservableListItems().get(0));
+
+        btnAddstock.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                //TODO: add stock through the cb and txt.
+            }
+        });
+        btnBack.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.setScene(overView);
+            }
+        });
+        btnLohuit.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                //TODO: Sessions?
+                primaryStage.setScene(StockInlog);
+            }
+        });
     }
-
 
     public static void main(String[] args) {
         launch(args);
@@ -150,15 +197,25 @@ public class StockApp extends Application {
     }
 
     private void initiateNodes() {
-        //test button
-        buttonTest = (Button) StockInlog.lookup("#henk");
-
+        // scene stock log in
         btnLogin = (Button) StockInlog.lookup("#btnLogin");
         name = (TextField) StockInlog.lookup("#txtInlogname");
         ww = (TextField) StockInlog.lookup("#txtWW");
 
+        // scene overview
+        addStock = (Button) overView.lookup("#btnAddItems");
+        Logout = (Button) overView.lookup("#btnLogOut");
         stockList = (ListView<Stock>) overView.lookup("#listviewStock1");
+        // test button
+        buttonTest = (Button) overView.lookup("#test");
 
+        // scene add stock
+        btnLohuit = (Button) stockEdit.lookup("#btnLogOut");
+        btnBack = (Button) stockEdit.lookup("#btnBack");
+        btnAddstock = (Button) stockEdit.lookup("#btnAddStock");
+        cbItems =(ComboBox<Item>) stockEdit.lookup("#cbProducts");
+        txtAmount = (TextField) stockEdit.lookup("#txtAmount");
+        stockListView = (ListView<Stock>) stockEdit.lookup("#stocklist");
     }
 
     private void initiateItems() {
@@ -191,5 +248,69 @@ public class StockApp extends Application {
         danone = new Item("danoontje", 0.90, ItemCategory.Other);
         tomaat = new Item("snoeptomaatjes", 0.90, ItemCategory.Other);
         ijsje = new Item("klein ijshoorntje", 1.00, ItemCategory.Other);
+
+        //region AddItems to estab
+        establishment.addItems(hamburger);
+        establishment.addItems(cheesburger);
+        establishment.addItems(bigmac);
+        establishment.addItems(mcChicken);
+        establishment.addItems(mcKroket);
+        establishment.addItems(mcFish);
+        establishment.addItems(mcWrap);
+        establishment.addItems(QP);
+        establishment.addItems(veggie);
+
+        establishment.addItems(kip6);
+        establishment.addItems(kip9);
+        establishment.addItems(kip20);
+
+        establishment.addItems(frietK);
+        establishment.addItems(frietM);
+        establishment.addItems(frietG);
+
+        establishment.addItems(saladeSide);
+        establishment.addItems(saladeKip);
+        establishment.addItems(saladeTonijn);
+
+        establishment.addItems(frisK);
+        establishment.addItems(frisM);
+        establishment.addItems(frisG);
+
+        establishment.addItems(danone);
+        establishment.addItems(tomaat);
+        establishment.addItems(ijsje);
+        //endregion
+
+        //region AddStock to estab
+        establishment.addStock(hamburger, 0);
+        establishment.addStock(cheesburger, 0);
+        establishment.addStock(bigmac, 0);
+        establishment.addStock(mcChicken, 0);
+        establishment.addStock(mcKroket, 0);
+        establishment.addStock(mcFish, 0);
+        establishment.addStock(mcWrap, 0);
+        establishment.addStock(QP, 0);
+        establishment.addStock(veggie, 0);
+
+        establishment.addStock(kip6, 0);
+        establishment.addStock(kip9, 0);
+        establishment.addStock(kip20, 0);
+
+        establishment.addStock(frietK, 0);
+        establishment.addStock(frietM, 0);
+        establishment.addStock(frietG, 0);
+
+        establishment.addStock(saladeSide, 0);
+        establishment.addStock(saladeKip, 0);
+        establishment.addStock(saladeTonijn, 0);
+
+        establishment.addStock(frisK, 0);
+        establishment.addStock(frisM, 0);
+        establishment.addStock(frisG, 0);
+
+        establishment.addStock(danone, 0);
+        establishment.addStock(tomaat, 0);
+        establishment.addStock(ijsje, 0);
+        //endregion
     }
 }
