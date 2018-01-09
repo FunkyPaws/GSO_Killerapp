@@ -30,7 +30,7 @@ public class Stock implements IStock, Serializable {
 
     @Override
     public String toString() {
-        return "item=" + itemName + "amount= " + amount;
+        return itemName + ", amount= " + amount;
     }
 
     @Override

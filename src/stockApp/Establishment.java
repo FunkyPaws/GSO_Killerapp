@@ -60,10 +60,6 @@ public class Establishment {
         return stockItems;
     }
 
-    public void setStockItems(List<Stock> stockItems) {
-        this.stockItems = stockItems;
-    }
-
     public void addStock(Item item, Integer amount) {
         int x = 0;
         Stock stock = new Stock(item, amount);
@@ -95,11 +91,10 @@ public class Establishment {
         //TODO make methode complete
     }
 
-    public void subscribe(StockManager stockManager) {
-        observableListStockItems.addListener(stockManager);
-    }
-
-    public void unsubscribe(StockManager manager) {
-        observableListStockItems.removeListener(manager);
-    }
+//    public void subscribe(StockManager stockManager) {
+//        observableListStockItems.addListener(stockManager);
+//    }
+//    public void unsubscribe(StockManager manager) {
+//        observableListStockItems.removeListener(manager);
+//    }
 }

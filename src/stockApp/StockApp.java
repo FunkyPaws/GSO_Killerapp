@@ -79,7 +79,7 @@ public class StockApp extends Application {
         manager = new Manager("henk", "henk", "Henk Ietsens");
 
         //make establishment
-        establishment = new Establishment("Eindhoven", "Eindhoven");
+        establishment = new Establishment("Eindhoven Markt", "Eindhoven");
 
         // make stockinlog scene
         Parent stockInlog = FXMLLoader.load(getClass().getResource("../views/ManagerInlog.fxml"));
@@ -94,7 +94,7 @@ public class StockApp extends Application {
         stockEdit = new Scene(stockedit);
 
         // set primary stage
-        primaryStage.setTitle("Mc Donalds " + establishment.getName());
+        primaryStage.setTitle("Mc Donalds : " + establishment.getName() + ", " + establishment.getPlace());
         primaryStage.setScene(StockInlog);
         primaryStage.show();
 
@@ -107,8 +107,6 @@ public class StockApp extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        establishment.addStock(hamburger, 100);
-        establishment.addStock(bigmac, 200);
     }
 
     private void events(Stage primaryStage) {
@@ -130,7 +128,7 @@ public class StockApp extends Application {
         buttonTest.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-
+                //TODO: fix the auto update
                 establishment.addStock(hamburger, 100);
                 System.out.println("stuff changed" + establishment.getStockItems().size());
                 stockManager.getStock(establishment);
@@ -159,7 +157,14 @@ public class StockApp extends Application {
         btnAddstock.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                //TODO: add stock through the cb and txt.
+                int amount = 0;
+                try {
+                    amount = Integer.parseInt(txtAmount.getText());
+                }
+                catch (NumberFormatException e){
+                    System.out.println("that was not a number");
+                }
+                establishment.addStock(cbItems.getValue(), amount);
             }
         });
         btnBack.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {

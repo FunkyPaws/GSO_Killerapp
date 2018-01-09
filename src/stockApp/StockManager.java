@@ -5,7 +5,7 @@ import shared.Stock;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class StockManager extends UnicastRemoteObject implements IStockCentral, ListChangeListener<Stock> {
+public class StockManager extends UnicastRemoteObject implements IStockCentral{
 
     private Registry registry;
     private Publisher publisher;
@@ -20,15 +20,7 @@ public class StockManager extends UnicastRemoteObject implements IStockCentral, 
     @Override
     public void getStock(Establishment establishment) {
         this.establishment = establishment;
-        establishment.subscribe(this);
+        //establishment.subscribe(this);
         publisher.update(establishment.getName(), establishment.getStockItems());
-    }
-
-    @Override
-    public void onChanged(Change c) {
-        if(c.wasUpdated()){
-            System.out.println("stuff changed" + establishment.getStockItems().size());
-            publisher.update(establishment.getName(), establishment.getStockItems());
-        }
     }
 }
