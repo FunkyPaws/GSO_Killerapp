@@ -17,7 +17,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.rmi.RemoteException;
+
 public class KioskApp extends Application {
+
+    //facade class
+    private OrderManager orderManager;
 
     private Order order;
     private Double money;
@@ -99,6 +104,9 @@ public class KioskApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        // make logic
+        orderManager = new OrderManager();
+
         // make kioskStart scene
         Parent kioskStart = FXMLLoader.load(getClass().getResource("../views/KioskStart.fxml"));
         KioskStart = new Scene(kioskStart);
@@ -132,10 +140,6 @@ public class KioskApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    public void placeOrder() {
-        //TODO fill in methode for rmi.
     }
 
     public void resetOrder() {
@@ -249,6 +253,11 @@ public class KioskApp extends Application {
             number = order.nextOrderNumber();
             txtNumber.setText(Integer.toString(number));
             primaryStage.setScene(kioskNumber);
+            try {
+                orderManager.Flikkerdiemeukdeanderekantin(order.getOrderRegel());
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
             doTime(primaryStage);
         });
         btnCancel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> primaryStage.setScene(KioskStart));

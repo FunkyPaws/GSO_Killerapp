@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import shared.Item;
 import shared.Stock;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Establishment {
@@ -32,10 +33,6 @@ public class Establishment {
         return observableListStockItems;
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
-
     public ObservableList<Item> getItemObservableListItems() {
         return itemObservableListItems;
     }
@@ -50,10 +47,6 @@ public class Establishment {
 
     public String getPlace() {
         return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
     }
 
     public List<Stock> getStockItems() {
@@ -87,14 +80,7 @@ public class Establishment {
         }
     }
 
-    public void removeStock(String itemname, Integer amount) {
+    public void removeStock(Item item, Integer amount) {
         //TODO make methode complete
     }
-
-//    public void subscribe(StockManager stockManager) {
-//        observableListStockItems.addListener(stockManager);
-//    }
-//    public void unsubscribe(StockManager manager) {
-//        observableListStockItems.removeListener(manager);
-//    }
 }

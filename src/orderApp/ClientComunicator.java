@@ -4,6 +4,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientComunicator {
     private final String hostID = "localhost";
@@ -50,4 +52,11 @@ public class ClientComunicator {
             System.out.println("Client: server is null pointer");
         }
     }
+
+    public void SendShit(List<OrderRegel> orderRegels) throws RemoteException {
+
+        iorderCentral.getOrderRegels(orderRegels);
+
+    }
+
 }
