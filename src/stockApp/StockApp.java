@@ -104,7 +104,7 @@ public class StockApp extends Application {
         events(primaryStage);
 
         try {
-            stockManager = new StockManager();
+            stockManager = new StockManager(establishment);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -125,7 +125,6 @@ public class StockApp extends Application {
         // scene overview
         buttonTest.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
             //TODO: fix the auto update
-            establishment.addStock(hamburger, 100);
             System.out.println("stuff changed" + establishment.getStockItems().size());
             stockManager.getStock(establishment);
             stockList.refresh();
@@ -251,35 +250,35 @@ public class StockApp extends Application {
         //endregion
 
         //region AddStock to estab
-        establishment.addStock(hamburger, 0);
-        establishment.addStock(cheesburger, 0);
-        establishment.addStock(bigmac, 0);
-        establishment.addStock(mcChicken, 0);
-        establishment.addStock(mcKroket, 0);
-        establishment.addStock(mcFish, 0);
-        establishment.addStock(mcWrap, 0);
-        establishment.addStock(QP, 0);
-        establishment.addStock(veggie, 0);
+        establishment.addStock(hamburger, 100);
+        establishment.addStock(cheesburger, 100);
+        establishment.addStock(bigmac, 100);
+        establishment.addStock(mcChicken, 100);
+        establishment.addStock(mcKroket, 100);
+        establishment.addStock(mcFish, 100);
+        establishment.addStock(mcWrap, 100);
+        establishment.addStock(QP, 100);
+        establishment.addStock(veggie, 100);
 
-        establishment.addStock(kip6, 0);
-        establishment.addStock(kip9, 0);
-        establishment.addStock(kip20, 0);
+        establishment.addStock(kip6, 100);
+        establishment.addStock(kip9, 100);
+        establishment.addStock(kip20, 100);
 
-        establishment.addStock(frietK, 0);
-        establishment.addStock(frietM, 0);
-        establishment.addStock(frietG, 0);
+        establishment.addStock(frietK, 100);
+        establishment.addStock(frietM, 100);
+        establishment.addStock(frietG, 100);
 
-        establishment.addStock(saladeSide, 0);
-        establishment.addStock(saladeKip, 0);
-        establishment.addStock(saladeTonijn, 0);
+        establishment.addStock(saladeSide, 100);
+        establishment.addStock(saladeKip, 100);
+        establishment.addStock(saladeTonijn, 100);
 
-        establishment.addStock(frisK, 0);
-        establishment.addStock(frisM, 0);
-        establishment.addStock(frisG, 0);
+        establishment.addStock(frisK, 100);
+        establishment.addStock(frisM, 100);
+        establishment.addStock(frisG, 100);
 
-        establishment.addStock(danone, 0);
-        establishment.addStock(tomaat, 0);
-        establishment.addStock(ijsje, 0);
+        establishment.addStock(danone, 100);
+        establishment.addStock(tomaat, 100);
+        establishment.addStock(ijsje, 100);
         //endregion
     }
 }

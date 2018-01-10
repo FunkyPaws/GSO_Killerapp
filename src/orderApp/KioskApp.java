@@ -270,11 +270,12 @@ public class KioskApp extends Application {
         btnJa.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             primaryStage.setScene(kioskPayOrder);
             money = order.getTotalPrice();
-            txtMoney.setText(money.toString());
+            txtMoney.setText(String.format("%.2f" ,money));
         });
 
         //Scene kiosk start
         listView.setItems(order.getObserverListOrderregels());
+        //listView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> order.removeItem(?? ,1));
         endOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> resetOrder());
         proceedOrder.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> primaryStage.setScene(kioskEndOrder));
 

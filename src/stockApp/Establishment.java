@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.Item;
 import shared.Stock;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -27,6 +28,7 @@ public class Establishment {
 
         items = new ArrayList<>();
         itemObservableListItems = FXCollections.observableList(items);
+
     }
 
     public ObservableList<Stock> getObservableListStockItems() {
@@ -82,5 +84,22 @@ public class Establishment {
 
     public void removeStock(Item item, Integer amount) {
         //TODO make methode complete
+        int j = 0;
+        Stock stock = new Stock(item, amount);
+        if (observableListStockItems.contains(stock)) {
+            for (int i = 0; i < observableListStockItems.size(); i++) {
+                Stock stock1 = observableListStockItems.get(i);
+                if (stock.equals(stock1)) {
+                    j = stock1.getAmount();
+                    int k = stock.getAmount();
+                    j -= k;
+                    stock1.setAmount(j);
+                }
+            }
+        } else {
+            System.out.println("the stock items doesn't exist");
+        }
+
+
     }
 }
