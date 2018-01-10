@@ -33,16 +33,6 @@ public class Item implements IItem, Serializable {
     }
 
     @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public ItemCategory getCategory() {
-        return category;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

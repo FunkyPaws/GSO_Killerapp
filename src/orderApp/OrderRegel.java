@@ -13,15 +13,6 @@ public class OrderRegel implements IOrderRegel {
     }
 
     @Override
-    public Item getItem(String itemName) {
-        if (itemName == item.getName()) {
-            return item;
-        } else {
-            return null;
-        }
-    }
-
-    @Override
     public Item getItem() {
         return item;
     }
