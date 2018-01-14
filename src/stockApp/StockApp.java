@@ -77,7 +77,7 @@ public class StockApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // make manager
-        manager = new Manager("henk", "henk", "Henk Ietsens");
+        manager = new Manager("manager", "manager", "Henk Ietsens");
 
         //make establishment
         establishment = new Establishment("Eindhoven Markt", "Eindhoven");

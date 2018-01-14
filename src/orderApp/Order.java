@@ -48,14 +48,6 @@ public class Order {
         }
     }
 
-    public void removeItem(Item item, int amount) {
-        //TODO: fix method
-        if (item != null) {
-            OrderRegel regel = new OrderRegel(item, amount);
-            orderRegels.remove(regel);
-        }
-    }
-
     public List<OrderRegel> getOrderRegel() {
         return orderRegels;
     }

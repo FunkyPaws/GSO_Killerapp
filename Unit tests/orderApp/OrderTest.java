@@ -20,6 +20,7 @@ class OrderTest {
 
     Order order1;
     Order order2;
+    Order order3;
 
     List<OrderRegel> orderRegels;
     List<OrderRegel> orderRegels2;
@@ -48,6 +49,7 @@ class OrderTest {
 
         order1 = new Order();
         order2 = new Order();
+        order3 = new Order();
 
         order2.addItem(frietM, 2);
         order2.addItem(saladeSide, 1);
@@ -71,11 +73,6 @@ class OrderTest {
 
         assertEquals(order1.getObserverListOrderregels(), order2.getObserverListOrderregels());
         assertEquals(order1.getObserverListOrderregels().size(), order2.getObserverListOrderregels().size());
-    }
-
-    @Test
-    void removeItem() throws Exception {
-
     }
 
     @Test
@@ -121,5 +118,4 @@ class OrderTest {
     void removeAllItems() throws Exception {
 
     }
-
 }
