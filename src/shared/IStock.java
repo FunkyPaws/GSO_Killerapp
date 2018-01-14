@@ -1,7 +1,6 @@
 package shared;
 
 /**
- * Interface is serializable.
  * Methode getItemName gets the name of a item.
  * The methode returns a string.
  * Methode getAmount gets the amount of the amount of items.
