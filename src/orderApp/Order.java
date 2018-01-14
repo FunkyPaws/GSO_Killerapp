@@ -61,10 +61,11 @@ public class Order {
     }
 
     public int nextOrderNumber() {
-        if (orderNumber < 100) {
-            orderNumber++;
-        } else if (orderNumber == 99) {
+        if(orderNumber >= 99){
             orderNumber = 0;
+        }
+        else if (orderNumber < 99) {
+            orderNumber++;
         }
         return orderNumber;
     }
@@ -72,7 +73,7 @@ public class Order {
     public Double getTotalPrice() {
         totalPrice = 0.0;
         for (OrderRegel orderregel : orderRegels) {
-            totalPrice += orderregel.getItem().getPrice()*orderregel.getAmount();
+            totalPrice += orderregel.getItem().getPrice() * orderregel.getAmount();
         }
         return totalPrice;
     }

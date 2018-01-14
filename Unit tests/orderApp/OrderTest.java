@@ -14,19 +14,12 @@ class OrderTest {
 
     Item frietM;
     Item saladeSide;
-    Item saladeKip;
-    Item frisK;
-    Item frisM;
-    Item danone;
-    Item tomaat;
 
     OrderRegel orderRegel1;
     OrderRegel orderRegel2;
-    OrderRegel orderRegel3;
 
     Order order1;
     Order order2;
-    Order order3;
 
     List<OrderRegel> orderRegels;
     List<OrderRegel> orderRegels2;
@@ -36,11 +29,6 @@ class OrderTest {
     void setUp() {
         frietM = new Item("medium friet", 1.75, ItemCategory.Fries);
         saladeSide = new Item("side salade", 1.25, ItemCategory.Salad);
-        saladeKip = new Item("Ceasan salade met kip", 2.45, ItemCategory.Salad);
-        frisK = new Item("kleine frisdrank", 1.25, ItemCategory.Drink);
-        frisM = new Item("medium frisdrank", 1.90, ItemCategory.Drink);
-        danone = new Item("danoontje", 0.90, ItemCategory.Other);
-        tomaat = new Item("snoeptomaatjes", 0.90, ItemCategory.Other);
 
         orderRegels = new ArrayList<>();
         orderRegels2 = new ArrayList<>();
@@ -64,7 +52,6 @@ class OrderTest {
         order2.addItem(frietM, 2);
         order2.addItem(saladeSide, 1);
         order2.addItem(frietM, 2);
-
     }
 
     @Test
@@ -102,14 +89,37 @@ class OrderTest {
 
     @Test
     void nextOrderNumber() throws Exception {
+
+        int[] result = new int[101];
+        boolean failed = false;
+        for(int x = 0; x<100; x++){
+            result[x] = order1.nextOrderNumber();
+            if(x != 0 && x!= 99){
+                if(++result[x-1] != result[x]){
+                    failed = true;
+                }
+            }
+            else if(x == 99){
+                if(result[x] != 0){
+                    failed = true;
+                }
+            }
+        }
+        assertFalse(failed);
     }
 
     @Test
     void getTotalPrice() throws Exception {
+        order1.addItem(saladeSide, 1);
+        order1.addItem(frietM, 2);
+        order1.addItem(frietM, 2);
+        double number = 8.25;
+        assertTrue(order1.getTotalPrice().equals(number));
     }
 
     @Test
     void removeAllItems() throws Exception {
+
     }
 
 }

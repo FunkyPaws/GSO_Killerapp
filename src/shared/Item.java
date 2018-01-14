@@ -6,15 +6,7 @@ public class Item implements IItem, Serializable {
 
     private String name;
     private Double price;
-    private String description;
     private ItemCategory category;
-
-    public Item(String name, Double price, String description, ItemCategory category) {
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.category = category;
-    }
 
     public Item(String name, Double price, ItemCategory category) {
         this.name = name;

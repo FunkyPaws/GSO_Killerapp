@@ -51,8 +51,4 @@ class OrderRegelTest {
         orderRegel2.setAmount(number2);
         assertTrue(orderRegel3.equals(orderRegel2));
     }
-
-    @Test
-    void equals()throws Exception {
-    }
 }
